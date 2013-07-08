@@ -8,24 +8,13 @@ function! LoadBundles()
     " Press F2 to see a list of files and directories from your
     " current working directory
     Bundle 'scrooloose/nerdtree'
-
-    " Powerline
     Bundle 'Lokaltog/powerline'
-
-    " Git plugins
     Bundle 'tpope/vim-fugitive'
-
-    " Python plugins
     Bundle 'klen/python-mode'
-
-    " Ruby plugins
     Bundle 'vim-ruby/vim-ruby'
-
-    " HTML plugins
     Bundle 'mattn/zencoding-vim'
-
-    " Supertab
     Bundle 'ervandew/supertab'
+    Bundle 'vim-scripts/VimClojure'
 endfunction
 
 
@@ -65,7 +54,7 @@ set noswapfile
 colorscheme desert
 
 if has("autocmd")
-    autocmd bufwritepost .vimrc source $MYVIMRC; 
+    "autocmd bufwritepost .vimrc source $MYVIMRC; 
 endif
 
 " Open .vimrc in new tab

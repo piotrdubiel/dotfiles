@@ -5,7 +5,7 @@ export LC_MESSAGES="en_US.UTF-8"
 export LC_MONETARY="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
-export LC_ALL=
+export LC_ALL="en_US.UTF-8"
 
 export PATH="$PATH:/opt/local/bin:$HOME/android-sdk/platform-tools/:/usr/local/opt/rabbitmq/sbin/"
 export ANDROID_HOME="$HOME/android-sdk"
@@ -39,3 +39,5 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 source $HOME/.git-completion.bash
 source $HOME/.hg-completion.bash
+
+source ~/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh 
