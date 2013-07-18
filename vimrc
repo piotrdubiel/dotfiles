@@ -5,8 +5,6 @@ scriptencoding utf-8
 function! LoadBundles()
     Bundle 'gmarik/vundle'
 
-    " Press F2 to see a list of files and directories from your
-    " current working directory
     Bundle 'scrooloose/nerdtree'
     Bundle 'Lokaltog/powerline'
     Bundle 'tpope/vim-fugitive'
@@ -14,7 +12,8 @@ function! LoadBundles()
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'mattn/zencoding-vim'
     Bundle 'ervandew/supertab'
-    Bundle 'vim-scripts/VimClojure'
+    Bundle 'kchmck/vim-coffee-script'
+    Bundle 'groenewege/vim-less'
 endfunction
 
 
@@ -54,7 +53,7 @@ set noswapfile
 colorscheme desert
 
 if has("autocmd")
-    "autocmd bufwritepost .vimrc source $MYVIMRC; 
+    " au BufWritePost,FileWritePost $MYVIMRC source $MYVIMRC
 endif
 
 " Open .vimrc in new tab
@@ -85,9 +84,18 @@ let NERDTreeIgnore=['\.o$', '\.so$', '\.bmp$', '\.class$', '^core.*',
             \ '\.git', '\.hg', '\.svn', '\.bzr' ]
 
 
+" Coffee Script
+if has('autocmd')
+    au BufWritePost *.coffee silent execute 'CoffeeMake! -o '.expand('%:p:h').'/../js/'
+endif
+
+" Less CSS
+if has('autocmd')
+    au BufWritePost *.less silent :!lessc % > %:p:h/../css/%:t:r.css
+endif
+
+
 "
 " ============================ MAPPINGS ======================================== 
 "
 
-" Calculator mapping
-ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
