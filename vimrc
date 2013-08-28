@@ -18,8 +18,14 @@ function! LoadBundles()
     Bundle 'ervandew/supertab'
     Bundle 'kchmck/vim-coffee-script'
     Bundle 'groenewege/vim-less'
-<<<<<<< HEAD
-    Bundle 'msanders/snipmate.vim'
+    Bundle 'ervandew/supertab'
+
+    " for snipmate
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    Bundle 'garbas/vim-snipmate'
+    Bundle 'honza/vim-snippets'
+
     Bundle 'terryma/vim-multiple-cursors'
 
     " Colorschemes
@@ -27,8 +33,6 @@ function! LoadBundles()
     Bundle 'Lokaltog/vim-distinguished'
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'endel/vim-github-colorscheme'
-=======
->>>>>>> 6488c8289d98fc2c8100d7fa114d18063b5bf8d0
 endfunction
 
 
@@ -73,11 +77,7 @@ colorscheme solarized
 
 " Auto reload .vimrc after save
 if has("autocmd")
-<<<<<<< HEAD
     au BufWritePost,FileWritePost ~/.vimrc :source $MYVIMRC
-=======
-    " au BufWritePost,FileWritePost $MYVIMRC source $MYVIMRC
->>>>>>> 6488c8289d98fc2c8100d7fa114d18063b5bf8d0
 endif
 
 " Open .vimrc in new tab
@@ -119,7 +119,7 @@ if has('autocmd')
     " au BufWritePost *.coffee silent CoffeeMake!
     au FileType coffee map <c-s> :CoffeeCompile watch vert<CR>
     au FileType coffee map <c-r> :CoffeeRun<CR>
-    " au FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    au FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     au FileType coffee map <leader>t :!mocha<CR>
 endif
 
@@ -157,21 +157,7 @@ function! RunTest()
     endif
 endfunction
 
-<<<<<<< HEAD
 command! RunTest call RunTest()
-=======
-" Coffee Script
-if has('autocmd')
-    au BufWritePost *.coffee silent execute 'CoffeeMake! -o '.expand('%:p:h').'/../js/'
-endif
-
-" Less CSS
-if has('autocmd')
-    au BufWritePost *.less silent :!lessc % > %:p:h/../css/%:t:r.css
-endif
-
-
->>>>>>> 6488c8289d98fc2c8100d7fa114d18063b5bf8d0
 "
 " ============================ MAPPINGS ======================================== 
 "
