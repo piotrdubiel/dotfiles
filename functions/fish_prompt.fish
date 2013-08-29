@@ -17,9 +17,9 @@ function fish_prompt
   set -l red (set_color -o red)
   set -l blue (set_color -o blue)
   set -l green (set_color -o green)
+  set -l purple (set_color -o 62A)
   set -l normal (set_color normal)
 
-  set -l arrow "$red➜ "
   set -l pwd $yellow ' @ '$normal(prompt_pwd)
  
   # Last status
@@ -41,5 +41,5 @@ function fish_prompt
     end
   end
 
-  echo -n -s $prompt_status $pwd $git_info $normal ' '
+  echo -n -s $prompt_status $pwd $git_info $purple' ケ'$normal
 end
