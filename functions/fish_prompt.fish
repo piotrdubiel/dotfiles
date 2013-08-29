@@ -17,11 +17,16 @@ function fish_prompt
   set -l red (set_color -o red)
   set -l blue (set_color -o blue)
   set -l green (set_color -o green)
-  set -l purple (set_color -o 62A)
+  set -l darkpurple (set_color -o 62A)
   set -l normal (set_color normal)
 
-  set -l pwd $yellow ' @ '$normal(prompt_pwd)
- 
+  set -l pwd
+  if [ u(prompt_pwd) = 'u~' ]
+    set pwd $yellow' ⌂'$normal
+  else
+    set pwd $yellow' @ '$normal(prompt_pwd)
+  end
+
   # Last status
   set -l prompt_status
   if test $last_status -ne 0
@@ -41,5 +46,5 @@ function fish_prompt
     end
   end
 
-  echo -n -s $prompt_status $pwd $git_info $purple' ケ'$normal
+  echo -n -s $prompt_status $pwd $git_info $darkpurple' ケ'$normal
 end
