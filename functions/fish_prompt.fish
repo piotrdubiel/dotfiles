@@ -22,17 +22,17 @@ function fish_prompt
 
   set -l pwd
   if [ u(prompt_pwd) = 'u~' ]
-    set pwd $yellow' ⌂'$normal
+    set pwd $yellow'⌂ '$normal
   else
-    set pwd $yellow' @ '$normal(prompt_pwd)
+    set pwd $yellow'@ '$normal(prompt_pwd)' '
   end
 
   # Last status
   set -l prompt_status
   if test $last_status -ne 0
-    set prompt_status $red'('$last_status')'$normal
+    set prompt_status $red'('$last_status')'$normal' '
   else
-    set prompt_status $green'('$last_status')'$normal
+    set prompt_status $green'✓ '$normal
   end
 
   if [ (_git_branch_name) ]
@@ -40,9 +40,9 @@ function fish_prompt
 
     if [ (_is_git_dirty) ]
       set -l dirty "$yellow ⚡"
-      set git_info "$blue ($git_branch$blue$dirty$blue)"
+      set git_info "$blue($git_branch$blue$dirty$blue)"
     else
-      set git_info "$blue ($git_branch$blue)"
+      set git_info "$blue($git_branch$blue)"
     end
   end
 
