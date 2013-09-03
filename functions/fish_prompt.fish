@@ -39,12 +39,21 @@ function fish_prompt
     set -l git_branch $green(_git_branch_name)
 
     if [ (_is_git_dirty) ]
-      set -l dirty "$yellow ⚡"
-      set git_info "$blue($git_branch$blue$dirty$blue)"
+      set -l mods ' +'(git status -s | grep "^M" | wc -l | cut -f 8 -d' ')
+      if test $mods = ' +0'
+        set -e mods
+      end
+      set -l adds ' ~'(git status -s | grep "^??" | wc -l | cut -f 8 -d' ')
+      if test $adds = ' ~0'
+        set -e adds
+      end
+
+      set -l dirty "$yellow⚡"
+      set git_info "$blue($git_branch$blue$green$mods$cyan$adds$blue) "
     else
-      set git_info "$blue($git_branch$blue)"
+      set git_info "$blue($git_branch$blue) "
     end
   end
 
-  echo -n -s $prompt_status $pwd $git_info $darkpurple' ケ'$normal
+  echo -n -s $prompt_status $pwd $git_info $darkpurple'ケ'$normal
 end
