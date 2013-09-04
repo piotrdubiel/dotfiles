@@ -39,15 +39,15 @@ function fish_prompt
     set -l git_branch $green(_git_branch_name)
 
     if [ (_is_git_dirty) ]
-      set -l mods ' +'(git status -s | egrep "^ ?M " | wc -l | cut -f 8 -d' ')
+      set -l mods ' +'(git status -s | egrep "^ ?M " | wc -l | egrep -o '\d+')
       if test $mods = ' +0'
         set -e mods
       end
-      set -l adds ' ~'(git status -s | egrep "^\?\? " | wc -l | cut -f 8 -d' ')
+      set -l adds ' ~'(git status -s | egrep "^\?\? " | wc -l | egrep -o '\d+')
       if test $adds = ' ~0'
         set -e adds
       end
-      set -l dels ' -'(git status -s | egrep "^ ?D "| wc -l | cut -f 8 -d' ')
+      set -l dels ' -'(git status -s | egrep "^ ?D "| wc -l | egrep -o '\d+')
       if test $dels = ' -0'
         set -e dels
       end
