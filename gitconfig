@@ -22,8 +22,10 @@
     cb = checkout -b
 
     k = commit
+    ka = commit -a
     km = commit -m
-    ka = commit --amend
+    kam = commit -am
+    knd = commit --amend
 
     ai = add --interactive
 

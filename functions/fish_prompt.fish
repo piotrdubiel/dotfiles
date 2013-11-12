@@ -39,7 +39,7 @@ function fish_prompt
     set -l git_branch $green(_git_branch_name)
 
     if [ (_is_git_dirty) ]
-      set -l mods ' +'(git status -s | egrep "^ ?M " | wc -l | egrep -o '\d+')
+      set -l mods ' +'(git status -s | egrep "^ ?[MA] " | wc -l | egrep -o '\d+')
       if test $mods = ' +0'
         set -e mods
       end
