@@ -20,12 +20,6 @@ function! LoadBundles()
     Bundle 'groenewege/vim-less'
     Bundle 'ervandew/supertab'
 
-    " for snipmate
-    Bundle "MarcWeber/vim-addon-mw-utils"
-    Bundle "tomtom/tlib_vim"
-    Bundle 'garbas/vim-snipmate'
-    Bundle 'honza/vim-snippets'
-
     Bundle 'terryma/vim-multiple-cursors'
 
     " Colorschemes
@@ -69,6 +63,7 @@ set softtabstop=4
 set number
 set nowrap
 set noswapfile
+set hlsearch
 
 let g:solarized_termcolors=256
 
@@ -95,6 +90,7 @@ endif
 " Ruby options
 if has('autocmd')
     autocmd FileType ruby,eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    au FileType ruby map <leader>b :normal orequire 'pry'; binding.pry<ESC>
 endif
 
 
@@ -115,7 +111,7 @@ let NERDTreeIgnore=['\.o$', '\.so$', '\.bmp$', '\.class$', '^core.*',
 
 " Coffee Script
 if has('autocmd')
-    au BufWritePost *.coffee silent execute 'CoffeeMake! -o '.expand('%:p:h').'/../js/'
+    " au BufWritePost *.coffee silent execute 'CoffeeMake! -o '.expand('%:p:h').'/../js/'
     " au BufWritePost *.coffee silent CoffeeMake!
     au FileType coffee map <c-s> :CoffeeCompile watch vert<CR>
     au FileType coffee map <c-r> :CoffeeRun<CR>
@@ -126,6 +122,11 @@ endif
 " Less CSS
 if has('autocmd')
     au BufWritePost *.less silent :!lessc % > %:p:h/../css/%:t:r.css
+endif
+
+" JSON
+if has('autocmd') && executable('python')
+    au BufNewFile,BufRead *.json map <leader>j :%! python -m json.tool<CR>
 endif
 
 function! RunTest()

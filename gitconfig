@@ -30,3 +30,6 @@
     ai = add --interactive
 
     br = branch -a
+
+    a = add . --all
+    f = fetch --all
