@@ -1,6 +1,14 @@
 alias c clear
 alias i "ping -c 5 http://www.github.com"
 
+alias g git
+alias m mvim
+alias t task
+alias tt "tree -hC"
+alias ll "ls -al"
+
+alias rcg "curl http://whatthecommit.com/index.txt"
+
 set fish_greeting (set_color red)'                             ___
               ___======____='(set_color yellow)'---='(set_color red)')
             /T            \_'(set_color yellow)'--==='(set_color red)')

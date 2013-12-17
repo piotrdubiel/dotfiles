@@ -60,5 +60,5 @@ function fish_prompt
     end
   end
 
-  echo -n -s $prompt_status $pwd $git_info $yellow'↑'(task count) $darkpurple' ケ'$normal
+  echo -n -s $prompt_status $pwd $git_info $yellow'↑'(task status:pending count) $darkpurple' ケ'$normal
 end
