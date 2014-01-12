@@ -85,7 +85,11 @@ if has('autocmd')
     au FileType python nmap <leader>t :RunTest<CR>
 endif
 
+" YAML options
 
+if has('autocmd')
+    au FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+endif
 
 " Ruby options
 if has('autocmd')

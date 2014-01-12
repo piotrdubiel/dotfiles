@@ -6,6 +6,8 @@ alias m mvim
 alias t task
 alias tt "tree -hC"
 alias ll "ls -al"
+alias ip "curl ifconfig\.me/ip"
+alias when "ping -i 20 -a (ip)"
 
 alias rcg "curl http://whatthecommit.com/index.txt"
 
@@ -50,3 +52,5 @@ set fish_greeting (set_color red)'                             ___
 
 # Init RVM
 rvm > /dev/null
+
+__set_custom_paths

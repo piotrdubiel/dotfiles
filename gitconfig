@@ -5,6 +5,8 @@
     excludesfile = /Users/piotrekd/.gitignore_global
 [color]
     ui = true
+[push]
+    default = current
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
