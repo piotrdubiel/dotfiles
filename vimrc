@@ -22,11 +22,14 @@ function! LoadBundles()
 
     Bundle 'terryma/vim-multiple-cursors'
 
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    Bundle "garbas/vim-snipmate"
+    Bundle "honza/vim-snippets"
+
     " Colorschemes
-    Bundle 'altercation/vim-colors-solarized'
     Bundle 'Lokaltog/vim-distinguished'
-    Bundle 'nanotech/jellybeans.vim'
-    Bundle 'endel/vim-github-colorscheme'
+    Bundle 'flazz/vim-colorschemes'
 endfunction
 
 
@@ -65,13 +68,13 @@ set nowrap
 set noswapfile
 set hlsearch
 
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 
-set background=dark
-colorscheme solarized
+"set background=dark
+colorscheme Monokai
 
-" Auto reload .vimrc after save
 if has("autocmd")
+    " Auto reload .vimrc after save
     au BufWritePost,FileWritePost ~/.vimrc :source $MYVIMRC
 endif
 
@@ -80,6 +83,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Python options
 let g:pymode_folding = 1
+let g:pymode_rope = 0
 if has('autocmd')
     " autocmd BufNewFile, BufRead *.py :compiler nose
     au FileType python nmap <leader>t :RunTest<CR>
@@ -94,9 +98,19 @@ endif
 " Ruby options
 if has('autocmd')
     autocmd FileType ruby,eruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-    au FileType ruby map <leader>b :normal orequire 'pry'; binding.pry<ESC>
+    au FileType ruby map <leader>b :normal <S-o>require 'pry'; binding.pry<ESC> :write<CR>
 endif
 
+" C/C++ options
+if has('autocmd')
+    autocmd BufRead,BufNewFile *.cpp,*.h,*.c,*.hpp map <D-F9> :!make<CR>
+    autocmd BufRead,BufNewFile *.cpp map <D-F8> :!g++ -c %<CR>
+endif
+
+" Gradle options
+if has('autocmd')
+    au BufRead,BufNewFile *.gradle setlocal filetype=groovy
+endif
 
 " NERD Tree
 nmap <F2> :NERDTreeToggle<CR>
@@ -163,6 +177,14 @@ function! RunTest()
 endfunction
 
 command! RunTest call RunTest()
+
+" SnipMate
+:imap <D-j> <Plug>snipMateNextOrTrigger
+:smap <D-j> <Plug>snipMateNextOrTrigger
+
+:imap <D-J> <Plug>snipMateBack
+:smap <D-J> <Plug>snipMateBack
+
 "
 " ============================ MAPPINGS ======================================== 
 "
