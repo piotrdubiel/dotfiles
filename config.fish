@@ -1,9 +1,22 @@
 set -gx EDITOR mvim -v
 
+function make_completion --argument-names alias command
+    echo "
+    function __alias_completion_$alias
+        set -l cmd (commandline -o)
+        set -e cmd[1]
+        complete -C\"$command \$cmd\"
+    end
+    " | .
+    complete -c $alias -a "(__alias_completion_$alias)"
+end
+
 alias c clear
 alias i "ping -c 5 http://www.github.com"
 
 alias g git
+make_completion g git
+
 alias m mvim
 alias t task
 alias tt "tree -hC"
@@ -17,6 +30,10 @@ function fish_greeting
     archey -c
 end
 
+set fish_path $HOME/.config/fish
+set fish_theme agnoster
+
+. $fish_path/oh-my-fish.fish
 
 #set fish_greeting (set_color red)'                             ___
 #              ___======____='(set_color yellow)'---='(set_color red)')
