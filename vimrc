@@ -1,50 +1,48 @@
 set nocompatible
 filetype off
-scriptencoding utf-8
-syntax on
-
-
-" Fish is weird with vim
-set shell=/bin/bash
 
 function! LoadBundles()
-    Bundle 'gmarik/vundle'
+    Plugin 'gmarik/Vundle.vim'
 
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'klen/python-mode'
-    Bundle 'vim-ruby/vim-ruby'
-    Bundle 'bingaman/vim-sparkup'
-    Bundle 'ervandew/supertab'
-    Bundle 'kchmck/vim-coffee-script'
-    Bundle 'groenewege/vim-less'
-    Bundle 'ervandew/supertab'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'klen/python-mode'
+    Plugin 'vim-ruby/vim-ruby'
+    Plugin 'bingaman/vim-sparkup'
+    Plugin 'ervandew/supertab'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'groenewege/vim-less'
+    Plugin 'rstacruz/sparkup'
+    Plugin 'fatih/vim-go'
 
-    Bundle 'terryma/vim-multiple-cursors'
+    Plugin 'terryma/vim-multiple-cursors'
 
-    Bundle "MarcWeber/vim-addon-mw-utils"
-    Bundle "tomtom/tlib_vim"
-    Bundle "garbas/vim-snipmate"
-    Bundle "honza/vim-snippets"
+    Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plugin 'tomtom/tlib_vim'
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'honza/vim-snippets'
+    Plugin 'jcf/vim-latex'
+    Plugin 'rizzatti/dash.vim'
+    Plugin 'suan/vim-instant-markdown'
 
     " Colorschemes
-    Bundle 'Lokaltog/vim-distinguished'
-    Bundle 'flazz/vim-colorschemes'
+    Plugin 'Lokaltog/vim-distinguished'
+    Plugin 'flazz/vim-colorschemes'
 endfunction
 
 
 " Install Vundle if needed
 if executable('git')
-    if !isdirectory(expand('~/.vim/bundle/vundle'))
+    if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
         echo "Installing Vundle...\n"
         silent !mkdir -p ~/vim/bundle
-        silent !git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+        silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
         let s:vundle_installed=1
     endif
 
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
     call LoadBundles()
+    call vundle#end()    
 
     if exists('s:vundle_installed') && s:vundle_installed
         unlet s:vundle_installed
@@ -53,9 +51,11 @@ if executable('git')
     endif
 endif
 
+scriptencoding utf-8
+syntax on
 filetype plugin indent on
-filetype indent on
-filetype plugin on
+" filetype indent on
+" filetype plugin on
 
 set autoread
 set autoindent
@@ -70,8 +70,8 @@ set hlsearch
 
 "let g:solarized_termcolors=256
 
-"set background=dark
-colorscheme Monokai
+set background=dark
+colorscheme gruvbox
 
 if has("autocmd")
     " Auto reload .vimrc after save
@@ -80,6 +80,9 @@ endif
 
 " Open .vimrc in new tab
 nmap <leader>v :tabedit $MYVIMRC<CR>
+
+" Mark file as coffee script
+nmap <leader>coffee :normal <S-o># vim:ft=coffee :<ESC> :write<CR> :set ft=coffee<CR>
 
 " Python options
 let g:pymode_folding = 1
@@ -129,12 +132,11 @@ let NERDTreeIgnore=['\.o$', '\.so$', '\.bmp$', '\.class$', '^core.*',
 
 " Coffee Script
 if has('autocmd')
-    " au BufWritePost *.coffee silent execute 'CoffeeMake! -o '.expand('%:p:h').'/../js/'
-    " au BufWritePost *.coffee silent CoffeeMake!
-    au FileType coffee map <c-s> :CoffeeCompile watch vert<CR>
-    au FileType coffee map <c-r> :CoffeeRun<CR>
-    au FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-    au FileType coffee map <leader>t :!mocha<CR>
+     " au BufWritePost *.coffee silent execute 'CoffeeMake! -o '.expand('%:p:h').'/../js/'
+     " au BufWritePost *.coffee silent CoffeeMake!
+     au FileType coffee map <c-s> :CoffeeCompile watch vert<CR>
+     au FileType coffee map <c-r> :CoffeeRun<CR>
+     au FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 endif
 
 " Less CSS
@@ -143,18 +145,18 @@ if has('autocmd')
 endif
 
 " JSON
-if has('autocmd') && executable('python')
-    au BufNewFile,BufRead *.json map <leader>j :%! python -m json.tool<CR>
+if executable('python')
+    map <leader>j :%! python -m json.tool<CR>
 endif
 
 function! RunTest()
     echo '...'
 
-    if filereadable(expand('./test'))
+    if filereadable(expand('./run_test'))
         hi GreenBar term=reverse ctermfg=white ctermbg=DarkGreen guifg=white guibg=DarkGreen
         hi RedBar   term=reverse ctermfg=white ctermbg=red guifg=white guibg=red
 
-        let msg=system("set -o pipefail && bash test | sed -n -e '/===========/,/---------/p'")
+        let msg=system("set -o pipefail && bash run_test | sed -n -e '/===========/,/---------/p'")
 
         let msg=substitute(msg,'[=-]','','g')
         let msg=substitute(msg, '\n', ' ', 'g')
