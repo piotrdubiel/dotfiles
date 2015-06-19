@@ -5,22 +5,29 @@ function! LoadBundles()
     Plugin 'gmarik/Vundle.vim'
 
     Plugin 'scrooloose/nerdtree'
-    Plugin 'klen/python-mode'
-    Plugin 'vim-ruby/vim-ruby'
+    Plugin 'majutsushi/tagbar'
     Plugin 'bingaman/vim-sparkup'
     Plugin 'ervandew/supertab'
+    Plugin 'rstacruz/sparkup'
+    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'xolox/vim-easytags'
+    Plugin 'xolox/vim-misc'
+    Plugin 'bling/vim-airline'
+
+    Plugin 'fatih/vim-go'
+    Plugin 'klen/python-mode'
+    Plugin 'skalnik/vim-vroom'
     Plugin 'kchmck/vim-coffee-script'
     Plugin 'groenewege/vim-less'
-    Plugin 'rstacruz/sparkup'
-    Plugin 'fatih/vim-go'
-
-    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'jcf/vim-latex'
+    Plugin 'udalov/kotlin-vim'
+    Plugin 'dsawardekar/ember.vim'
+    Plugin 'mustache/vim-mustache-handlebars'
 
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
     Plugin 'garbas/vim-snipmate'
     Plugin 'honza/vim-snippets'
-    Plugin 'jcf/vim-latex'
     Plugin 'rizzatti/dash.vim'
     Plugin 'suan/vim-instant-markdown'
 
@@ -51,7 +58,9 @@ if executable('git')
     endif
 endif
 
+set encoding=utf-8
 scriptencoding utf-8
+set guifont=Meslo\ LG\ M\ for\ Powerline:h11
 syntax on
 filetype plugin indent on
 " filetype indent on
@@ -69,9 +78,10 @@ set noswapfile
 set hlsearch
 
 "let g:solarized_termcolors=256
-
 set background=dark
 colorscheme gruvbox
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'tomorrow'
 
 if has("autocmd")
     " Auto reload .vimrc after save
@@ -81,8 +91,6 @@ endif
 " Open .vimrc in new tab
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
-" Mark file as coffee script
-nmap <leader>coffee :normal <S-o># vim:ft=coffee :<ESC> :write<CR> :set ft=coffee<CR>
 
 " Python options
 let g:pymode_folding = 1
@@ -96,6 +104,22 @@ endif
 
 if has('autocmd')
     au FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+endif
+
+" Golang options
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+if has('autocmd')
+    au FileType go nmap <Leader>i <Plug>(go-info)
+    au FileType go nmap <Leader>gd <Plug>(go-doc)
+    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+    au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+    au FileType go nmap <Leader>e <Plug>(go-rename)
 endif
 
 " Ruby options
@@ -113,6 +137,11 @@ endif
 " Gradle options
 if has('autocmd')
     au BufRead,BufNewFile *.gradle setlocal filetype=groovy
+endif
+
+" SCSS options
+if has('autocmd')
+    autocmd FileType scss setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 endif
 
 " NERD Tree
@@ -191,3 +220,6 @@ command! RunTest call RunTest()
 " ============================ MAPPINGS ======================================== 
 "
 
+if has('autocmd')
+    autocmd BufReadPre * call tagbar#ToggleWindow()
+endif

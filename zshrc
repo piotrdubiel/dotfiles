@@ -65,18 +65,7 @@ export PATH="/opt/android-ndk:$PATH"
 export PATH="$HOME/workspace/idb:$PATH"
 export PATH="$HOME/workspace/dotfiles/bin:$PATH"
 export PATH="$HOME/external:$PATH"
-#export PATH="/usr/local/bin:$PATH"
-#export PATH="/Users/piotrekd/.rvm/gems/ruby-2.0.0-p247@global/bin:$PATH"
-#export PATH="/Users/piotrekd/.rvm/rubies/ruby-2.0.0-p247/bin:$PATH"
-#export PATH="/Users/piotrekd/.rvm/bin:$PATH"
-#export PATH="/usr/bin:$PATH"
-#export PATH="/bin:$PATH"
-#export PATH="/usr/sbin:$PATH"
-#export PATH="/sbin:$PATH"
-#export PATH="/usr/local/bin:$PATH"
-#export PATH="/opt/X11/bin:$PATH"
-#export PATH="/usr/texbin:$PATH"
-#export PATH="/usr/local/git/bin:$PATH"
+
 
 export NDK_ROOT="/opt/android-ndk"
 export ANDROID_NDK_HOME=$NDK_ROOT
@@ -89,27 +78,9 @@ source $(brew --prefix nvm)/nvm.sh
 
 # GO
 export GOPATH=$HOME/go
-
-#export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-#
+export PATH="$PATH:$GOPATH/bin"
+export GOROOT=`go env GOROOT`
+export PATH=$PATH:$GOROOT/bin
 
 source ~/external/zsh-history-substring-search/zsh-history-substring-search.zsh
 
@@ -130,6 +101,10 @@ archey -c
 export PATH=./node_modules/.bin:$PATH
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+eval $(boot2docker shellinit)
 
 # added by travis gem
 [ -f /Users/piotrekd/.travis/travis.sh ] && source /Users/piotrekd/.travis/travis.sh
+
+PERL_MB_OPT="--install_base \"/Users/piotrekd/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/piotrekd/perl5"; export PERL_MM_OPT;
