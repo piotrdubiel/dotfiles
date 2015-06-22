@@ -2,7 +2,8 @@
 	name = Piotrek Dubiel
 	email = piotr.dubiel@polidea.com
 [core]
-    excludesfile = /Users/piotrekd/.gitignore_global
+	excludesfile = /Users/piotrekd/.gitignore_global
+	editor = /usr/bin/vim
 [color]
     ui = true
 [push]
@@ -12,16 +13,19 @@
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+	trustExitCode = true
 [alias]
-    le = log --oneline --decorate
-    lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    le = log --oneline --decorate --date=short --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' 
+    lx = log --oneline --decorate --date=short --pretty=format:'%Cred%ad %Cblue%an%Cgreen%d %Creset%s' 
+    ll = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lm = log --oneline --decorate --date=short --pretty=format:'%s%Cgreen%d' 
     
     st = status
     ss = status -s
     
     c = checkout
     cb = checkout -b
+    cd = checkout -
 
     k = commit
     ka = commit -a
@@ -29,9 +33,14 @@
     kam = commit -am
     knd = commit --amend
 
-    ai = add --interactive
 
     br = branch -a
+    brd = branch -D
 
     a = add . --all
+    ai = add -p
     f = fetch --all
+
+    su = submodule update --init --recursive
+
+    clo = clone
