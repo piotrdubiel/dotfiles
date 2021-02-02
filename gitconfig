@@ -1,28 +1,22 @@
+# This is Git's per-user configuration file.
 [user]
-	name = Piotrek Dubiel
+	name = Piotr Dubiel
 	email = piotr.dubiel@polidea.com
-[core]
-	excludesfile = /Users/piotrekd/.gitignore_global
-	editor = /usr/bin/vim
 [color]
     ui = true
+
 [push]
     default = current
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+
 [alias]
-    le = log --oneline --decorate --date=short --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' 
-    lx = log --oneline --decorate --date=short --pretty=format:'%Cred%ad %Cblue%an%Cgreen%d %Creset%s' 
+    le = log --oneline --decorate --date=short --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s'
+    lx = log --oneline --decorate --date=short --pretty=format:'%Cred%ad %Cblue%an%Cgreen%d %Creset%s'
     ll = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-    lm = log --oneline --decorate --date=short --pretty=format:'%s%Cgreen%d' 
-    
+    lm = log --oneline --decorate --date=short --pretty=format:'%s%Cgreen%d'
+
     st = status
     ss = status -s
-    
+
     c = checkout
     cb = checkout -b
     cd = checkout -
@@ -36,6 +30,9 @@
 
     br = branch -a
     brd = branch -D
+    brda = "!f(){ git branch -D \"$1\"; git push --no-verify origin \":$1\"; };f"
+
+    tgda = "!f(){ git tag -d \"$1\"; git push --no-verify origin \":$1\"; };f"
 
     a = add . --all
     ai = add -p
@@ -44,3 +41,8 @@
     su = submodule update --init --recursive
 
     clo = clone
+
+    puff = pull --ff
+    purr = pull --rebase
+
+    oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
