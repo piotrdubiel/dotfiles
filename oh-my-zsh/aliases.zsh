@@ -13,3 +13,6 @@ alias when="ping -i 20 -a (ip)"
 
 alias rcg="curl http://whatthecommit.com/index.txt"
 alias dokku="bash ~/external/dokku.sh" 
+
+alias y=yarn
+
