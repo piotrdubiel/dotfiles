@@ -65,3 +65,5 @@ opam:
 	
 ocaml-packages:
 	opam install reason dune merlin
+	opam pin add ocaml-lsp-server https://github.com/ocaml/ocaml-lsp.git
+	opam install ocaml-lsp-server
