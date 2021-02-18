@@ -48,7 +48,7 @@ ZSH_THEME="aaa"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby gem rvm bundler python pip virtualenvwrapper gradle brew nyan taskwarrior)
+plugins=(git ruby gem bundler python pip virtualenvwrapper gradle brew nyan)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,55 +56,3 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
-
-#export PATH="/Users/piotrekd/.rvm/gems/ruby-2.1.1/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/opt/android-sdk/platform-tools:$PATH"
-export PATH="/opt/android-sdk/tools:$PATH"
-export PATH="/opt/android-ndk:$PATH"
-export PATH="$HOME/workspace/idb:$PATH"
-export PATH="$HOME/workspace/dotfiles/bin:$PATH"
-export PATH="$HOME/external:$PATH"
-
-
-export NDK_ROOT="/opt/android-ndk"
-export ANDROID_NDK_HOME=$NDK_ROOT
-export ANDROID_HOME="/opt/android-sdk"
-export APIARY_API_KEY=74ac3dae26f97add3ab25245fbccd949
-
-# NVM
-export NVM_DIR=$HOME/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
-# GO
-export GOPATH=$HOME/go
-export PATH="$PATH:$GOPATH/bin"
-export GOROOT=`go env GOROOT`
-export PATH=$PATH:$GOROOT/bin
-
-source ~/external/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-bindkey "\e[A" history-substring-search-up
-bindkey "\e[B" history-substring-search-down
-
-# Setup zsh-autosuggestions
-source ~/external/zsh-autosuggestions/autosuggestions.zsh
-
-# Enable autosuggestions automatically
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
-
-archey -c
-
-export PATH=./node_modules/.bin:$PATH
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-eval $(boot2docker shellinit)
-
-# added by travis gem
-[ -f /Users/piotrekd/.travis/travis.sh ] && source /Users/piotrekd/.travis/travis.sh
-
-PERL_MB_OPT="--install_base \"/Users/piotrekd/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/piotrekd/perl5"; export PERL_MM_OPT;

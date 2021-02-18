@@ -34,11 +34,16 @@ zsh: sudo brew
 	chsh -s /usr/local/bin/zsh || true
 	@echo "Zsh installed!"
 
-oh-my-zsh: zsh $(HOME)/.oh-my-zsh
-	cp -r $(DOTFILES_DIR)/oh-my-zsh/* $(HOME)/.oh-my-zsh/custom/
+oh-my-zsh: zsh $(HOME)/.oh-my-zsh $(HOME)/.zshrc $(HOME)/.oh-my-zsh/custom
 
 $(HOME)/.oh-my-zsh:
 	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
+
+$(HOME)/.zshrc: $(DOTFILES_DIR)/zshrc
+	cp zshrc $(HOME)/.zshrc
+
+$(HOME)/.oh-my-zsh/custom: $(DOTFILES_DIR)/oh-my-zsh/*
+	cp -r $(DOTFILES_DIR)/oh-my-zsh/* $(HOME)/.oh-my-zsh/custom/
 
 ruby: brew
 	brew list ruby || brew install ruby
