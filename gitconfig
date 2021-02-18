@@ -1,7 +1,6 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Piotr Dubiel
-	email = piotr.dubiel@polidea.com
 [color]
     ui = true
 
