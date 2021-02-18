@@ -24,6 +24,8 @@ git-install:
 	@echo "Git installed!"
 
 git-config: $(HOME)/.gitconfig
+
+$(HOME)/.gitconfig:
 	cp $(DOTFILES_DIR)/gitconfig $(HOME)/.gitconfig
 	@echo "Updated git config!"
 
