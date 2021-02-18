@@ -34,9 +34,11 @@ zsh: sudo brew
 	chsh -s /usr/local/bin/zsh || true
 	@echo "Zsh installed!"
 
-oh-my-zsh: zsh
-	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
+oh-my-zsh: zsh $(HOME)/.oh-my-zsh
 	cp -r $(DOTFILES_DIR)/oh-my-zsh/* $(HOME)/.oh-my-zsh/custom/
+
+$(HOME)/.oh-my-zsh:
+	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
 
 ruby: brew
 	brew list ruby || brew install ruby
@@ -50,3 +52,11 @@ $(TEMPORARY_DIR)/firacode: tmp
 firacode: $(TEMPORARY_DIR)/firacode
 	cp $(TEMPORARY_DIR)/firacode/distr/ttf/* $(HOME)/Library/Fonts/
 
+ocaml: opam ocaml-packages
+	
+opam:
+	brew list opam || brew install opam
+	opam init --auto-setup
+	
+ocaml-packages:
+	opam install reason dune merlin
